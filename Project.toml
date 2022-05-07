@@ -1,0 +1,8 @@
+name = "AirSim"
+uuid = "566f24a0-d46a-4a59-8362-b48a30208282"
+authors = ["Yoga14s\\CXIN <genius_cx@qq.com>"]
+version = "0.1.0"
+
+[deps]
+MsgPack = "99f44e22-a591-53d1-9472-aa23ef4bd671"
+Sockets = "6462fe0b-24de-5631-8697-dd941f90decc"
