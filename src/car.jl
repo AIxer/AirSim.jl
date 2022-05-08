@@ -1,7 +1,26 @@
-struct Car <: Vehicle
-    session::RPCSession
+abstract type Car <: Vehicle end
+
+mutable struct CarKinematics
+    linear_acceleration::NED
+    linear_velocity::NED
+    orientation::NED
+    position::NED
+    angular_acceleration::NED
+    angular_velocity::NED
 end
 
-Car(port::Integer) = Car(RPCSession(port))
+mutable struct CarState
+    speed::Float64
+    handbrake::Bool
+    maxrpm::Int
+    rpm::Int
+    kinematics_estimated::CarKinematics
+    timestamp::Integer
+    gear::Integer
+end
 
-state(car::Car, vname="") = call(car.session, :getCarState, vname)
+
+function state(car::RPCSession{Car})
+    info = call(car, :getCarState, car.name)
+    dict2struct(CarState, info)
+end

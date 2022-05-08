@@ -1,12 +1,15 @@
 const REQUEST = 0
 
-mutable struct RPCSession{S}
-    sock::S
+
+mutable struct RPCSession{V}
+    name::Symbol
+    sock::TCPSocket
     msgid::Int
 end
 
-RPCSession(port::Integer) = RPCSession(Sockets.connect(port), 1)
-RPCSession(addr::IPAddr, port::Integer) = RPCSession(Sockets.connect(addr, port), 1)
+function RPCSession(::Type{V}; name=Symbol(), addr=ip"127.0.0.1", port=41451) where V <: Vehicle
+    RPCSession{V}(name, Sockets.connect(addr, port), 1)
+end
 
 Base.close(s::RPCSession) = close(s.sock)
 
