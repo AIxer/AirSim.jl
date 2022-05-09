@@ -43,3 +43,7 @@ getimage(s::RPCSession, camera_name, image_type, external=false) =
 
 getimages(s::RPCSession, requests, external=false) = 
     call(s, :simGetImages, requests, s.name, external) .|> ImageResponse
+
+
+distance(s::RPCSession, sensorname="") = 
+    call(s, :getDistanceSensorData, sensorname, s.name)
