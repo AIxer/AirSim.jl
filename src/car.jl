@@ -21,6 +21,13 @@ end
 
 
 function state(car::RPCSession{Car})
-    info = call(car, :getCarState, car.name)
-    dict2struct(CarState, info)
+    call(car, :getCarState, car.name)
+end
+
+function controls(car::RPCSession{Car})
+    call(car, :getCarControls, car.name)
+end
+
+function setcontrols(car::RPCSession{Car}, controls)
+    call(car, :setCarControls, controls, car.name)
 end
