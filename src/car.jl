@@ -19,13 +19,25 @@ mutable struct CarState
     gear::Integer
 end
 
+mutable struct CarControl
+    brake::Float64
+    is_manual_gear::Bool
+    handbrake::Bool
+    manual_gear::Int
+    steering::Float64
+    throttle::Float64
+    gear_immediate::Bool
+end
+
+MsgPack.msgpack_type(::Type{CarControl}) = MsgPack.StructType()
 
 function state(car::RPCSession{Car})
     call(car, :getCarState, car.name)
 end
 
 function controls(car::RPCSession{Car})
-    call(car, :getCarControls, car.name)
+    info = call(car, :getCarControls, car.name)
+    dict2struct(CarControl, info)
 end
 
 function setcontrols(car::RPCSession{Car}, controls)
