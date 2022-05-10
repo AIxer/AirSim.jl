@@ -4,7 +4,7 @@ connect(::Type{T}, addr::IPAddr, port::Integer=41451) where T <: RPCSession = RP
 shutdown(s::RPCSession) = close(s)
 
 # common APIs
-reset(s::RPCSession) = call(s, :reset)
+simreset(s::RPCSession) = call(s, :reset)
 ping(s::RPCSession) = call(s, :ping)
 serverversion(s::RPCSession) = call(s, :getServerVersion)
 

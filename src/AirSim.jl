@@ -6,7 +6,7 @@ using MsgPack
 export RPCSession, call
 export Car, Drone, ping, sim_paused, sim_pause, shutdown,
     state, multirotor, controls, setcontrols, distance,
-    api_enable, api_enabled
+    api_enable, api_enabled, simreset
 
 
 abstract type Vehicle end
